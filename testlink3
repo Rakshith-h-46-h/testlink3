@@ -7,16 +7,18 @@
 </head>
 <body>
     <h2>GitHub Pages is Working ✅</h2>
-    <p>If you see this text, your GitHub Pages is properly configured.</p>
+    <p id="output">Fetching data...</p>
 
     <script>
-        alert("✅ JavaScript is running!");
-
+        // Get URL Parameters
         let urlParams = new URLSearchParams(window.location.search);
         let payload = urlParams.get("payload");
 
+        // Check if payload exists and update content
         if (payload) {
-            document.body.innerHTML += `<h3>Payload: ${payload}</h3>`;
+            document.getElementById("output").innerText = `Payload: ${payload}`;
+        } else {
+            document.getElementById("output").innerText = "No payload found.";
         }
     </script>
 </body>
