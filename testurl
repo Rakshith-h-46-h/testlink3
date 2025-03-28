@@ -6,19 +6,33 @@
     <title>Display Sender ID</title>
 </head>
 <body>
-    <h1>Sender ID:</h1>
-    <p id="senderId"></p>
+    <h1>Select Name:</h1>
+    <select id="nameDropdown">
+        <option value="">Select a name</option>
+    </select>
 
     <script>
         var queryString = window.location.search;
         var urlParams = new URLSearchParams(queryString);
-        var senderId = urlParams.get("senderId");
-console.log(senderId)
+        var payload = urlParams.get("payload");
         
-        if (senderId) {
-            document.getElementById("senderId").textContent = senderId;
+        if (payload) {
+            try {
+                var decodedPayload = JSON.parse(decodeURIComponent(payload));
+                var records = decodedPayload.records;
+                var dropdown = document.getElementById("nameDropdown");
+                
+                records.forEach(record => {
+                    var option = document.createElement("option");
+                    option.value = record.name;
+                    option.textContent = record.name;
+                    dropdown.appendChild(option);
+                });
+            } catch (error) {
+                console.error("Error parsing payload:", error);
+            }
         } else {
-            document.getElementById("senderId").textContent = "No sender ID found.";
+            console.error("No payload found in the URL.");
         }
     </script>
 </body>
