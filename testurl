@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Sender ID</title>
+</head>
+<body>
+    <h1>Sender ID:</h1>
+    <p id="senderId"></p>
+
+    <script>
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var senderId = urlParams.get("senderId");
+        
+        if (senderId) {
+            document.getElementById("senderId").textContent = senderId;
+        } else {
+            document.getElementById("senderId").textContent = "No sender ID found.";
+        }
+    </script>
+</body>
+</html>
